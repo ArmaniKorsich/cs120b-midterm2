@@ -8,8 +8,6 @@ void Detect_Max_Amp()
     	switch(detect_max_amp_state)
     	{
         	case DMAInit:
-			//initialize variables here
-			reading = 0x00;
 			if ((PORTB & 0x02) == 0x02) { //active earthquake
 				if ((~PINA & 0xF8) > reading) { //determine maximum
 					reading = (~PINA & 0xF8); //update maximum

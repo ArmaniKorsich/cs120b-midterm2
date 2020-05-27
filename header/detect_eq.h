@@ -14,22 +14,22 @@ void Detect_EQ()
 			detect_count = 0x00;
 			
 			//if an earthquake is detected
-			if ( (~PINA >> 3) != 0x00) {
-				detect_eq_state = d1_detect;
-			} else {
+			if ( (~PINA & 0xF8) == 0x00) {
 				detect_eq_state = DEQInit;
+			} else {
+				detect_eq_state = d1_detect;
 			}
             		break;
 		case d1_detect:
 			//if the earthquake stopped, go to the count
-			if ( (~PINA >> 3) == 0x00) {
+			if ( (~PINA & 0xF8) == 0x00) {
 				detect_eq_state = d2_count;
 			} else {
 				detect_eq_state = d1_detect;
 			}
 			break;
 		case d2_count:
-			if ( (~PINA >> 3) == 0x00 ) {
+			if ( (~PINA & 0xF8) == 0x00 ) {
 				detect_count++;
 				if (detect_count == 10) {
 					detect_eq_state = DEQInit;
@@ -51,8 +51,10 @@ void Detect_EQ()
 			value_detect_eq = 0x00;
             		break;
 		case d1_detect:
+			value_detect_eq = 0x55;
+			break;
 		case d2_count:
-			value_detect_eq = 0x02;
+			value_detect_eq = 0x55;
 			break;
         	default:
 			value_detect_eq = 0x00;
