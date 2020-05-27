@@ -51,10 +51,10 @@ void Detect_EQ()
 			value_detect_eq = 0x00;
             		break;
 		case d1_detect:
-			value_detect_eq = 0x55;
+			value_detect_eq = 0x02;
 			break;
 		case d2_count:
-			value_detect_eq = 0x55;
+			value_detect_eq = 0x02;
 			break;
         	default:
 			value_detect_eq = 0x00;
